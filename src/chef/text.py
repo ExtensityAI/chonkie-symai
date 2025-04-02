@@ -2,8 +2,8 @@
 
 import re
 
-from src.chef.base import BaseChef
-from src.chef.patterns import ABBREVIATIONS, UnicodeReplacements
+from .base import BaseChef
+from .patterns import ABBREVIATIONS, UnicodeReplacements
 
 
 class TextChef(BaseChef):

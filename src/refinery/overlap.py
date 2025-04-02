@@ -4,8 +4,8 @@ from bisect import bisect_left
 from itertools import accumulate
 from typing import Any, List, Literal, Optional, Tuple
 
-from src.refinery.base import BaseRefinery
-from src.types import (
+from .base import BaseRefinery
+from ..types import (
     Chunk,
     Context,
     RecursiveChunk,
@@ -14,7 +14,7 @@ from src.types import (
     SemanticChunk,
     SentenceChunk,
 )
-from src.tokenizer import Tokenizer
+from ..tokenizer import Tokenizer
 
 
 class OverlapRefinery(BaseRefinery):

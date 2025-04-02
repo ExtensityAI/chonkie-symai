@@ -4,7 +4,7 @@ import re
 import warnings
 from typing import Any, Callable, List, Literal, Tuple, Union
 
-from src.types import Chunk
+from ..types import Chunk
 
 from .base import BaseChunker
 

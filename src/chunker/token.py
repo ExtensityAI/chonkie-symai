@@ -5,7 +5,7 @@ import warnings
 
 from tqdm import trange
 
-from src.types import Chunk
+from ..types import Chunk
 
 from .base import BaseChunker
 

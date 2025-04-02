@@ -5,7 +5,7 @@ from bisect import bisect_left
 from itertools import accumulate
 from typing import Any, Callable, List, Literal, Union
 
-from src.types import Chunk, Sentence, SentenceChunk
+from ..types import Chunk, Sentence, SentenceChunk
 
 from .base import BaseChunker
 
