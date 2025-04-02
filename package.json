@@ -4,7 +4,7 @@
     "description": "Port of Chonkie to Symai ecosystem",
     "expressions": [
         {
-            "module": "src/chunker",
+            "module": "src/chonkie_chunker",
             "type": "ChonkieChunker"
         }
     ],

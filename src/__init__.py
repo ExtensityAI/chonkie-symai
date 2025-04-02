@@ -41,17 +41,15 @@ from .types import (
     Sentence,
     SentenceChunk,
 )
+from .chonkie_chunker import ChonkieChunker
 
-# This hippo grows with every release 🦛✨~
 __version__ = "0.5.0"
 __name__ = "chonkie"
-__author__ = "🦛 Chonkie AI Team"
 
 # Add basic package metadata to __all__
 __all__ = [
     "__name__",
     "__version__",
-    "__author__",
 ]
 
 # Add all data classes to __all__
@@ -109,4 +107,9 @@ __all__ += [
     "TextChef",
     "ABBREVIATIONS",
     "UnicodeReplacements",
+]
+
+# Add all symai classes to __all__
+__all__ += [
+    "ChonkieChunker",
 ]
