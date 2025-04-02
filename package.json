@@ -1,0 +1,12 @@
+{
+    "version": "0.1",
+    "name": "ExtensityAI/chonkie-symai",
+    "description": "Port of Chonkie to Symai ecosystem",
+    "expressions": [
+        {
+            "module": "src/chunker",
+            "type": "ChonkieChunker"
+        }
+    ],
+    "dependencies": []
+}
