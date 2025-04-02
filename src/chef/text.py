@@ -2,8 +2,8 @@
 
 import re
 
-from chonkie.chef.base import BaseChef
-from chonkie.chef.patterns import ABBREVIATIONS, UnicodeReplacements
+from src.chef.base import BaseChef
+from src.chef.patterns import ABBREVIATIONS, UnicodeReplacements
 
 
 class TextChef(BaseChef):

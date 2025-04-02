@@ -5,8 +5,8 @@ from functools import lru_cache
 from itertools import accumulate
 from typing import Any, Callable, List, Literal, Optional, Union
 
-from chonkie.chunker.base import BaseChunker
-from chonkie.types import Chunk, RecursiveChunk, RecursiveLevel, RecursiveRules
+from src.chunker.base import BaseChunker
+from src.types import Chunk, RecursiveChunk, RecursiveLevel, RecursiveRules
 
 
 class RecursiveChunker(BaseChunker):

@@ -3,7 +3,7 @@
 from abc import ABC, abstractmethod
 from typing import List, Union
 
-from chonkie.types import Chunk
+from src.types import Chunk
 
 
 class BaseRefinery(ABC):

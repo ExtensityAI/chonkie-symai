@@ -2,7 +2,7 @@
 
 from typing import Any, List, Literal, Union
 
-from chonkie.types import SemanticChunk, Sentence
+from src.types import SemanticChunk, Sentence
 
 from .semantic import SemanticChunker
 

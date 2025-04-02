@@ -4,9 +4,9 @@ import importlib.util as importutil
 import warnings
 from typing import List, Literal, Union
 
-from chonkie.chunker.base import BaseChunker
-from chonkie.embeddings.base import BaseEmbeddings
-from chonkie.types import SemanticChunk, SemanticSentence, Sentence
+from src.chunker.base import BaseChunker
+from src.embeddings.base import BaseEmbeddings
+from src.types import SemanticChunk, SemanticSentence, Sentence
 
 if importutil.find_spec("numpy"):
     import numpy as np
@@ -126,7 +126,7 @@ class SemanticChunker(BaseChunker):
         if isinstance(embedding_model, BaseEmbeddings):
             self.embedding_model = embedding_model
         elif isinstance(embedding_model, str):
-            from chonkie.embeddings.auto import AutoEmbeddings
+            from src.embeddings.auto import AutoEmbeddings
 
             self.embedding_model = AutoEmbeddings.get_embeddings(
                 embedding_model, **kwargs

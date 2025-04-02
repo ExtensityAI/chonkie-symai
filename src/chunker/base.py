@@ -7,8 +7,8 @@ from typing import Any, Callable, List, Union
 
 from tqdm import tqdm
 
-from chonkie.tokenizer import Tokenizer
-from chonkie.types import Chunk
+from src.tokenizer import Tokenizer
+from src.types import Chunk
 
 
 class BaseChunker(ABC):

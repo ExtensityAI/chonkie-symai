@@ -1,9 +1,9 @@
 from typing import List, Optional, Union
 
 from beartype import beartype
-from . import (RecursiveChunker, SDPMChunker, SemanticChunker,
+from src.chunker import (RecursiveChunker, SDPMChunker, SemanticChunker,
                      SentenceChunker, TokenChunker)
-from .embeddings.base import BaseEmbeddings
+from src.embeddings.base import BaseEmbeddings
 from symai import Expression, Symbol
 from tokenizers import Tokenizer
 

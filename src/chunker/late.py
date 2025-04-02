@@ -5,8 +5,8 @@ from bisect import bisect_left
 from itertools import accumulate
 from typing import TYPE_CHECKING, List, Literal, Union
 
-from chonkie.embeddings import BaseEmbeddings, SentenceTransformerEmbeddings
-from chonkie.types import LateChunk, Sentence
+from src.embeddings import BaseEmbeddings, SentenceTransformerEmbeddings
+from src.types import LateChunk, Sentence
 
 from .base import BaseChunker
 
@@ -81,7 +81,7 @@ class LateChunker(BaseChunker):
         if isinstance(embedding_model, BaseEmbeddings):
             self.embedding_model = embedding_model
         elif isinstance(embedding_model, str):
-            from chonkie.embeddings.auto import AutoEmbeddings
+            from src.embeddings.auto import AutoEmbeddings
 
             self.embedding_model = AutoEmbeddings.get_embeddings(
                 embedding_model, **kwargs
