@@ -17,6 +17,7 @@ CHUNKER_MAPPING = {
 
 @beartype
 class ChonkieChunker(Expression):
+    _TOKENIZER_CACHE = {}
     def __init__(
         self,
         tokenizer_name: Optional[str] = "gpt2",
@@ -34,7 +35,10 @@ class ChonkieChunker(Expression):
 
     def _resolve_chunker(self, chunker_name: str, **chunker_kwargs) -> Union[TokenChunker, SentenceChunker, RecursiveChunker, SemanticChunker, SDPMChunker]:
         if chunker_name in ["TokenChunker", "SentenceChunker", "RecursiveChunker"]:
-            tokenizer = Tokenizer.from_pretrained(self.tokenizer_name)
+            # Cache tokenizer objects per name to reduce memory churn
+            if self.tokenizer_name not in ChonkieChunker._TOKENIZER_CACHE:
+                ChonkieChunker._TOKENIZER_CACHE[self.tokenizer_name] = Tokenizer.from_pretrained(self.tokenizer_name)
+            tokenizer = ChonkieChunker._TOKENIZER_CACHE[self.tokenizer_name]
             return CHUNKER_MAPPING[chunker_name](tokenizer, **chunker_kwargs)
         elif chunker_name in ["SemanticChunker", "SDPMChunker"]:
             return CHUNKER_MAPPING[chunker_name](embedding_model=self.embedding_model_name, **chunker_kwargs)
