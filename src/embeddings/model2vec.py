@@ -4,13 +4,9 @@ import importlib.util as importutil
 from typing import TYPE_CHECKING, List, Union
 
 from .base import BaseEmbeddings
+from ..lazy_imports import numpy, model2vec
 
 if TYPE_CHECKING:
-    import numpy as np
-    from model2vec import StaticModel
-
-# import numpy and model2vec only if they are available
-if importutil.find_spec("model2vec"):
     import numpy as np
     from model2vec import StaticModel
 
@@ -35,10 +31,10 @@ class Model2VecEmbeddings(BaseEmbeddings):
             raise ImportError(
                 "model2vec is not available. Please install it via `pip install chonkie[model2vec]`"
             )
-        else:
-            global StaticModel, np
-            import numpy as np
-            from model2vec import StaticModel
+
+        # Use lazy imports
+        StaticModel = model2vec.StaticModel
+        np = numpy
 
         if isinstance(model, str):
             self.model_name_or_path = model

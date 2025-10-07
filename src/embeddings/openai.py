@@ -6,14 +6,10 @@ import warnings
 from typing import TYPE_CHECKING, List, Optional
 
 from .base import BaseEmbeddings
+from ..lazy_imports import numpy, tiktoken, openai
 
 if TYPE_CHECKING:
     import numpy as np
-
-if importutil.find_spec("openai"):
-    import numpy as np
-    import tiktoken
-    from openai import OpenAI
 
 
 class OpenAIEmbeddings(BaseEmbeddings):
@@ -60,6 +56,10 @@ class OpenAIEmbeddings(BaseEmbeddings):
             raise ValueError(
                 f"Model {model} not available. Choose from: {list(self.AVAILABLE_MODELS.keys())}"
             )
+
+        # Use lazy imports
+        np = numpy
+        OpenAI = openai.OpenAI
 
         self.model = model
         self._dimension = self.AVAILABLE_MODELS[model]

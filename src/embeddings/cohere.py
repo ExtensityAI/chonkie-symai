@@ -5,9 +5,8 @@ import os
 import warnings
 from typing import List, Optional
 
-import numpy as np
-
 from .base import BaseEmbeddings
+from ..lazy_imports import numpy, requests, tokenizers, cohere
 
 
 class CohereEmbeddings(BaseEmbeddings):
@@ -65,11 +64,10 @@ class CohereEmbeddings(BaseEmbeddings):
             raise ImportError(
                 "Cohere package is not available. Please install it via pip."
             )
-        else:
-            global cohere
-            import requests
-            import tokenizers
-            from cohere import ClientV2  # using v2
+
+        # Use lazy imports
+        np = numpy
+        ClientV2 = cohere.ClientV2
 
         if model not in self.AVAILABLE_MODELS:
             raise ValueError(

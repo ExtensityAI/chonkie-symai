@@ -4,12 +4,9 @@ import importlib.util as importutil
 from typing import TYPE_CHECKING, List, Union
 
 from .base import BaseEmbeddings
+from ..lazy_imports import numpy, sentence_transformers
 
 if TYPE_CHECKING:
-    import numpy as np
-    from sentence_transformers import SentenceTransformer
-
-if importutil.find_spec("sentence_transformers"):
     import numpy as np
     from sentence_transformers import SentenceTransformer
 
@@ -47,10 +44,10 @@ class SentenceTransformerEmbeddings(BaseEmbeddings):
             raise ImportError(
                 "SentenceTransformer is not available. Please install it via pip."
             )
-        else:
-            global SentenceTransformer, np
-            import numpy as np
-            from sentence_transformers import SentenceTransformer
+
+        # Use lazy imports
+        SentenceTransformer = sentence_transformers.SentenceTransformer
+        np = numpy
 
         if isinstance(model, str):
             self.model_name_or_path = model

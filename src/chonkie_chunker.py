@@ -5,7 +5,7 @@ from .chunker import (RecursiveChunker, SDPMChunker, SemanticChunker,
                      SentenceChunker, TokenChunker)
 from .embeddings.base import BaseEmbeddings
 from symai import Expression, Symbol
-from tokenizers import Tokenizer
+from .lazy_imports import tokenizers
 
 CHUNKER_MAPPING = {
     "TokenChunker": TokenChunker,
@@ -37,6 +37,7 @@ class ChonkieChunker(Expression):
         if chunker_name in ["TokenChunker", "SentenceChunker", "RecursiveChunker"]:
             # Cache tokenizer objects per name to reduce memory churn
             if self.tokenizer_name not in ChonkieChunker._TOKENIZER_CACHE:
+                Tokenizer = tokenizers.Tokenizer
                 ChonkieChunker._TOKENIZER_CACHE[self.tokenizer_name] = Tokenizer.from_pretrained(self.tokenizer_name)
             tokenizer = ChonkieChunker._TOKENIZER_CACHE[self.tokenizer_name]
             return CHUNKER_MAPPING[chunker_name](tokenizer, **chunker_kwargs)

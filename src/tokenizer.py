@@ -5,6 +5,8 @@ import inspect
 from collections import defaultdict
 from typing import Any, Callable, Dict, List, Union
 
+from .lazy_imports import tokenizers, tiktoken, transformers
+
 
 class Tokenizer:
 
@@ -64,16 +66,14 @@ class Tokenizer:
         else:
             try:
                 if importlib.util.find_spec("tokenizers") is not None:
-                    from tokenizers import Tokenizer
-
+                    Tokenizer = tokenizers.Tokenizer
                     return Tokenizer.from_pretrained(tokenizer_name)
                 else:
                     raise Warning("Tokenizers library not found. Trying tiktoken.")
             except Exception:
                 try:
                     if importlib.util.find_spec("tiktoken") is not None:
-                        from tiktoken import get_encoding
-
+                        get_encoding = tiktoken.get_encoding
                         return get_encoding(tokenizer_name)
                     else:
                         raise Warning(
@@ -82,8 +82,7 @@ class Tokenizer:
                 except Exception:
                     try:
                         if importlib.util.find_spec("transformers") is not None:
-                            from transformers import AutoTokenizer
-
+                            AutoTokenizer = transformers.AutoTokenizer
                             return AutoTokenizer.from_pretrained(tokenizer_name)
                         else:
                             raise ValueError(
