@@ -74,6 +74,7 @@ class SentenceTransformerEmbeddings(BaseEmbeddings):
         This method is useful for getting the token embeddings of a text. It
         would work even if the text is longer than the maximum sequence length.
         """
+        np = numpy  # Get actual numpy module
         if text == "":
             return np.array([])
 

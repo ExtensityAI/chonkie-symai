@@ -74,6 +74,7 @@ class Model2VecEmbeddings(BaseEmbeddings):
 
     def similarity(self, u: "np.ndarray", v: "np.ndarray") -> "np.float32":
         """Compute cosine similarity of two embeddings."""
+        np = numpy  # Get actual numpy module
         return np.divide(
             np.dot(u, v), np.linalg.norm(u) * np.linalg.norm(v), dtype=np.float32
         )

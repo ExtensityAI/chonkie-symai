@@ -82,6 +82,7 @@ class OpenAIEmbeddings(BaseEmbeddings):
 
     def embed(self, text: str) -> "np.ndarray":
         """Get embeddings for a single text."""
+        np = numpy  # Get actual numpy module
         token_count = self.count_tokens(text)
         if token_count > 8191 and self._show_warnings:  # OpenAI's token limit
             warnings.warn(
@@ -98,6 +99,7 @@ class OpenAIEmbeddings(BaseEmbeddings):
 
     def embed_batch(self, texts: List[str]) -> List["np.ndarray"]:
         """Get embeddings for multiple texts using batched API calls."""
+        np = numpy  # Get actual numpy module
         if not texts:
             return []
 
@@ -153,6 +155,7 @@ class OpenAIEmbeddings(BaseEmbeddings):
 
     def similarity(self, u: "np.ndarray", v: "np.ndarray") -> "np.float32":
         """Compute cosine similarity between two embeddings."""
+        np = numpy  # Get actual numpy module
         return np.divide(
             np.dot(u, v), np.linalg.norm(u) * np.linalg.norm(v), dtype=float
         )

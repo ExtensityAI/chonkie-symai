@@ -3,10 +3,13 @@
 import importlib
 import os
 import warnings
-from typing import List, Optional
+from typing import TYPE_CHECKING, List, Optional
 
 from .base import BaseEmbeddings
 from ..lazy_imports import numpy, requests, tokenizers, cohere
+
+if TYPE_CHECKING:
+    import numpy as np
 
 
 class CohereEmbeddings(BaseEmbeddings):
@@ -100,8 +103,9 @@ class CohereEmbeddings(BaseEmbeddings):
             timeout=timeout,
         )
 
-    def embed(self, text: str) -> np.ndarray:
+    def embed(self, text: str) -> "np.ndarray":
         """Generate embeddings for a single text."""
+        np = numpy  # Get actual numpy module
         token_count = self.count_tokens(text)
         if (
             token_count > 512 and self._show_warnings
@@ -129,8 +133,9 @@ class CohereEmbeddings(BaseEmbeddings):
 
         raise RuntimeError("Unable to generate embeddings through Cohere.")
 
-    def embed_batch(self, texts: List[str]) -> List[np.ndarray]:
+    def embed_batch(self, texts: List[str]) -> List["np.ndarray"]:
         """Get embeddings for multiple texts using batched API calls."""
+        np = numpy  # Get actual numpy module
         if not texts:
             return []
 
@@ -194,8 +199,9 @@ class CohereEmbeddings(BaseEmbeddings):
         tokens = self._tokenizer.encode_batch(texts, add_special_tokens=False)
         return [len(t) for t in tokens]
 
-    def similarity(self, u: np.ndarray, v: np.ndarray) -> float:
+    def similarity(self, u: "np.ndarray", v: "np.ndarray") -> float:
         """Compute cosine similarity between two embeddings."""
+        np = numpy  # Get actual numpy module
         return np.divide(
             np.dot(u, v), np.linalg.norm(u) * np.linalg.norm(v), dtype=float
         )
